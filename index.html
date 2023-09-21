@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Códigos QR</title>
+</head>
+<body>
+    <h1>Generador de Códigos QR</h1>
+    
+    <label for="link1">Enlace 1:</label>
+    <input type="text" id="link1" placeholder="Ingrese el primer enlace">
+    <button onclick="generarQR(1)">Generar QR</button>
+    <div id="qrCode1"></div>
+
+    <label for="link2">Enlace 2:</label>
+    <input type="text" id="link2" placeholder="Ingrese el segundo enlace">
+    <button onclick="generarQR(2)">Generar QR</button>
+    <div id="qrCode2"></div>
+
+    <label for="link3">Enlace 3:</label>
+    <input type="text" id="link3" placeholder="Ingrese el tercer enlace">
+    <button onclick="generarQR(3)">Generar QR</button>
+    <div id="qrCode3"></div>
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script>
+        function generarQR(numero) {
+            const inputId = `link${numero}`;
+            const qrCodeId = `qrCode${numero}`;
+            const link = `https://qrcnfeclipses20232024.github.io/${document.getElementById(inputId).value}`;
+            const qrCodeDiv = document.getElementById(qrCodeId);
+
+            if (link) {
+                const qrcode = new QRCode(qrCodeDiv, {
+                    text: link,
+                    width: 128,
+                    height: 128
+                });
+            } else {
+                qrCodeDiv.innerHTML = "Ingrese un enlace válido.";
+            }
+        }
+    </script>
+</body>
+</html>
