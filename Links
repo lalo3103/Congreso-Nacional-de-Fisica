@@ -1,24 +1,48 @@
-pip install qrcode[pil]
-import qrcode
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Códigos QR</title>
+</head>
+<body>
+    <h1>Generador de Códigos QR</h1>
+    
+    <label for="link1">Enlace 1:</label>
+    <input type="text" id="link1" placeholder="https://viep.com.mx/edehaci-m/">
+    <button onclick="generarQR(1)">Generar QR</button>
+    <div id="qrCode1"></div>
 
-# Define los tres enlaces que deseas convertir en códigos QR
-links = [
-    "https://viep.com.mx/edehaci-m/",
-    "https://correobuap-my.sharepoint.com/:f:/g/personal/jose_vegag_alumno_buap_mx/EpW6SeN_bpVCrL8aHrGMzHMBBEknWfwgHNl1AEQ9VSPayA?e=GgH8ag",
-    "https://forms.gle/nBV36dyjiciN7VN56"
-]
+    <label for="link2">Enlace 2:</label>
+    <input type="text" id="link2" placeholder="https://correobuap-my.sharepoint.com/:f:/g/personal/jose_vegag_alumno_buap_mx/EpW6SeN_bpVCrL8aHrGMzHMBBEknWfwgHNl1AEQ9VSPayA?e=GgH8ag">
+    <button onclick="generarQR(2)">Generar QR</button>
+    <div id="qrCode2"></div>
 
-# Crea los códigos QR y guárdalos en archivos PNG
-for i, link in enumerate(links):
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,
-    )
-    qr.add_data(link)
-    qr.make(fit=True)
+    <label for="link3">Enlace 3:</label>
+    <input type="text" id="link3" placeholder="https://forms.gle/nBV36dyjiciN7VN56">
+    <button onclick="generarQR(3)">Generar QR</button>
+    <div id="qrCode3"></div>
 
-    img = qr.make_image(fill_color="black", back_color="white")
-    img.save(f"qr_code_{i+1}.png")
-    print(f"Creado qr_code_{i+1}.png para {link}")
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script>
+        function generarQR(numero) {
+            const inputId = `link${numero}`;
+            const qrCodeId = `qrCode${numero}`;
+            const link = document.getElementById(inputId).value;
+            const qrCodeDiv = document.getElementById(qrCodeId);
+
+            if (link) {
+                const qrcode = new QRCode(qrCodeDiv, {
+                    text: link,
+                    width: 128,
+                    height: 128
+                });
+            } else {
+                qrCodeDiv.innerHTML = "Ingrese un enlace válido.";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
